@@ -9,14 +9,28 @@ You can visit this [link](https://www.digitalocean.com/community/tutorials/how-t
 
 Update local apt package and install redis using
 
-`sudo apt update sudo apt install redis-server`
+```
+sudo apt update
+sudo apt install redis-server
+```
 
 Open this file
 `sudo nano /etc/redis/redis.conf`
 
 Find `supervised` and set it to systemmd since you are running Ubuntu which uses the systemd init system
 
-`supervised systemd`
+```
+# If you run Redis from upstart or systemd, Redis can interact with your
+# supervision tree. Options:
+#   supervised no      - no supervision interaction
+#   supervised upstart - signal upstart by putting Redis into SIGSTOP mode
+#   supervised systemd - signal systemd by writing READY=1 to $NOTIFY_SOCKET
+#   supervised auto    - detect upstart or systemd method based on
+#                        UPSTART_JOB or NOTIFY_SOCKET environment variables
+# Note: these supervision methods only signal "process is ready."
+#       They do not enable continuous liveness pings back to your supervisor.
+supervised systemd
+```
 
 ## Node JS Setup
 
